@@ -142,4 +142,7 @@ $(document).ready(function(){
 		}
     });
 	adjustFullScreenSize();
+
+
+
 });
