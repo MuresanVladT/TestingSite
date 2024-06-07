@@ -1,160 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="canonical" href="https://html5-templates.com/" />
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="script.js"></script>	
-	<link rel="stylesheet" type="text/css" href="style.css" />
-	<title>Windows Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="canonical" href="https://html5-templates.com/" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Assuming your CSS file is in a folder named 'css' -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <!-- Assuming your JS file is in a folder named 'js' -->
+    <script src="js/script.js"></script>
+    <title>Windows Template</title>
 </head>
 <body>
-	<div id="desktop">
-		<div class="window closed" data-title="Add/Remove Elements Test
-">			<div class="row">
-      <div id="content" class="large-12 columns">
-        <h3>Click the "Add Element" button in order to add more elements!</h3>
-		<h3>Click the "Delete" button in order to remove any added element!<h3>
-</br>
-<div class="example">
-  <button onclick="addElement()">Add Element</button>
-  <hr />
-  <div id="elements">
-    
-      
-    
-  </div>
+<div id="desktop">
+    <div class="window closed" data-title="Add/Remove Elements Test">
+        <div class="row">
+            <div id="content" class="large-12 columns">
+                <h3>Click the "Add Element" button in order to add more elements!</h3>
+                <h3>Click the "Delete" button in order to remove any added element!</h3>
+                <br>
+                <div class="example">
+                    <button onclick="addElement()">Add Element</button>
+                    <hr />
+                    <div id="elements"></div>
+                </div>
+                <script>
+                    function addElement() {
+                        $("<button class='added-manually' onclick='deleteElement()'>Delete</button>").appendTo('#elements');
+                    }
+                    function deleteElement() {
+                        $('#elements button:first-child').remove();
+                    }
+                </script>
+                <style>
+                    button.added-manually {
+                        margin-right: 0.285em;
+                    }
+                    button {
+                        margin-bottom: 10px;
+                    }
+                </style>
+            </div>
+        </div>
+        <div id='page-footer' class="row">
+            <div class="large-4 large-centered columns">
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="window closed" data-title="Checkboxes Test">
+        <h3>Checkboxes</h3>
+        <form id='checkboxes'>
+            <input type="checkbox"> checkbox 1<br>
+            <input type="checkbox" checked> checkbox 2
+        </form>
+        <script>
+            var form = document.getElementById('checkboxes');
+            var checkboxes = form.getElementsByTagName('input');
+            for (var i=0, len=checkboxes.length; i<len; i++) {
+                checkboxes[i].onclick = function() {
+                    this.checked ? this.setAttribute("checked", "") : this.removeAttribute("checked");
+                }
+            }
+        </script>
+    </div>
+    <div class="window closed" data-title="Dropdown Test">
+        <h3>Dropdown List</h3>
+        <label for="options">Choose an option:</label>
+        <select id="options" name="options">
+            <option value="" disabled="disabled" selected="selected">Please select an option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+        </select>
+        <script>
+            var dropdown = document.getElementById('options');
+            dropdown.onchange = function(event) {
+                var options = dropdown.getElementsByTagName('option');
+                for (var i = 0; i < options.length; i++) {
+                    options[i].removeAttribute('selected');
+                }
+                document
+                    .querySelector(`#options option[value='${event.target.value}']`)
+                    .setAttribute('selected', 'selected');
+            };
+        </script>
+    </div>
+    <div class="window closed" data-title="Hover Test">
+        <style>
+            .figure {
+                float: left;
+                padding-right: 20px;
+            }
+            .figcaption {
+                display: none;
+            }
+            .figure:hover .figcaption {
+                display: block;
+            }
+        </style>
+        <div class="example">
+            <h3>Hovers</h3>
+            <p>Hover over the image for additional information</p>
+            <div class="figure">
+                <img src="/img/avatar-blank.jpg" alt="User Avatar">
+                <div class="figcaption">
+                    <h5>name: user1</h5>
+                    <a href="/users/1">View profile</a>
+                </div>
+            </div>
+            <div class="figure">
+                <img src="/img/avatar-blank.jpg" alt="User Avatar">
+                <div class="figcaption">
+                    <h5>name: user2</h5>
+                    <a href="/users/2">View profile</a>
+                </div>
+            </div>
+            <div class="figure">
+                <img src="/img/avatar-blank.jpg" alt="User Avatar">
+                <div class="figcaption">
+                    <h5>name: user3</h5>
+                    <a href="/users/3">View profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="taskbar"></div>
+    <div id="icons">
+        <a class="openWindow" data-id="2">Add/Remove Elements Test</a>
+        <a class="openWindow" data-id="3">Checkboxes Test</a>
+        <a class="openWindow" data-id="4">Dropdown Test</a>
+        <a class="openWindow" data-id="5">Hover Test</a>
+    </div>
+    <a href="https://html5-templates.com/" rel="nofollow" target="_blank" id="templateLink">&copy; HTML5-Templates.com</a>
 </div>
-
-<script>
-  function addElement() {
-    $("<button class='added-manually' onclick='deleteElement()'>Delete</button>").appendTo('#elements');
-  }
-  function deleteElement() {
-    $('#elements button:first-child').remove();
-  }
-</script>
-<style>
-button.added-manually {
-  margin-right: 0.285em;
-}
-button {
-  margin-bottom: 10px;
-}
-</style>
-
-      </div>
-    </div>
-    <div id='page-footer' class="row">
-      <div class="large-4 large-centered columns">
-        <hr>
-      </div>
-    </div>
-		</div>
-		<div class="window closed" data-title="Checkboxes Test">
-			<h3>Checkboxes</h3>
-  <form id='checkboxes'>
-    <input type="checkbox"> checkbox 1</br>
-    <input type="checkbox" checked> checkbox 2
-  </form>
-</div>
-<script>
-var form = document.getElementById('checkboxes');
-var checkboxes = form.getElementsByTagName('input');
-for (var i=0, len=checkboxes.length; i<len; i++) {
-    checkboxes[i].onclick = function() {
-      this.checked ? this.setAttribute("checked", "") : this.removeAttribute("checked");
-    }
-}
-</script>
-		</div>
-		<div class="window closed" data-title="Dropdown Test">
-			<h3>Dropdown List</h3>
-	<label for="options">Choose an option:</label>		
-  <select id="options" name="options">
-    <option value="" disabled="disabled" selected="selected"
-      >Please select an option</option
-    >
-    <option value="1">Option 1</option>
-    <option value="2">Option 2</option>
-  </select>
-</div>
-<script>
-  var dropdown = document.getElementById('dropdown');
-  dropdown.onchange = function(event) {
-    var options = dropdown.getElementsByTagName('option');
-    for (var i = 0; i < options.length; i++) {
-      options[i].removeAttribute('selected');
-    }
-    document
-      .querySelector(`#dropdown option[value='${event.target.value}']`)
-      .setAttribute('selected', 'selected');
-  };
-</script>
-		</div>
-		<div class="window closed" data-title="Hover Test">
-		<style>
-.figure {
-  float: left;
-  padding-right: 20px;
-}
-
-.figcaption {
-  display: none;
-}
-
-.figure:hover .figcaption {
-  display: block;
-}
-</style>
-
-<div class="example">
-  <h3>Hovers</h3>
-  <p>Hover over the image for additional information</p>
-  
-  <div class="figure">
-    <img src="/img/avatar-blank.jpg" alt="User Avatar">
-    <div class="figcaption">
-      <h5>name: user1</h5>
-      <a href="/users/1">View profile</a>
-    </div>
-  </div>
-  
-  <div class="figure">
-    <img src="/img/avatar-blank.jpg" alt="User Avatar">
-    <div class="figcaption">
-      <h5>name: user2</h5>
-      <a href="/users/2">View profile</a>
-    </div>
-  </div>
-  
-  <div class="figure">
-    <img src="/img/avatar-blank.jpg" alt="User Avatar">
-    <div class="figcaption">
-      <h5>name: user3</h5>
-      <a href="/users/3">View profile</a>
-    </div>
-  </div>
-  
-</div>
-		</div>
-		
-		<div id="taskbar">		
-		</div>
-		
-		<div id="icons">
-			<a class="openWindow" data-id="2">Add/Remove Elements Test</a>
-			<a class="openWindow" data-id="3">Checkboxes Test</a>
-			<a class="openWindow" data-id="4">Dropdown Test</a>
-			<a class="openWindow" data-id="5">Hover Test</a>
-		</div>
-		<a href="https://html5-templates.com/" rel="nofollow" target="_blank" id="templateLink">&copy; HTML5-Templates.com</a>	
-		<!-- You can use this template freely if you leave a visible link to HTML5-Templates.com -->
-	</div>
 </body>
-
 </html>
